@@ -58,7 +58,7 @@ Particularly SadServers wants to test these professionals (or people aspiring to
 
 To scratch a personal itch and because there's nothing like this that I'm aware of. There are/were some sandbox solutions like Katacoda (shut down in May 2022) but nothing that gives you a specific problem with a condition of victory on a real server.  
 
-It's also my not-so-secret hope that a sophisticated enough version of SadServers could be used by tech companies (or for companies that carry on job interviews on their behalf) to automate or facilitate the Linux troubleshooting interview section.  
+SadServers is also being used by tech companies to automate or facilitate Linux troubleshooting interviews, as well as for internal training.
 
 An annoyance I found during my interviews is that sometimes instead of helping, the interviewer unintentionally misleads you, or you feel like you are in a tv game where you have to maximize for some arbitrary points and come up with an game strategy that doesn't reflect real incident situations (do I try to keep solving this problem or do I move to the next one, which one is better?).
 
@@ -71,7 +71,7 @@ SadServers was "launched" in [Hacker News in October 2022](https://news.ycombina
 
 ## How does it look?
 
-![ux](sadservers_ux_medium.png)
+![ux](SadServersDemo.gif)
 
 
 ## Architecture
@@ -306,6 +306,8 @@ See [Issues](https://github.com/fduran/sadservers/issues)
 - ~~Login using Gmail account.~~ [DONE]
 - ~~Invite system.~~ [DONE]
 - ~~Guided learning system.~~ [DONE], kind of, with Markdown, see [Scenario Guides](https://docs.sadservers.com/docs/scenario-guides/)
+- ~~Achievements page with downloadable PDF certificate.~~ [DONE]
+- Enterprise features so companies can create their own interviews, invite candidates and track their results.
 - Multi-VM scenarios, "SRE Simulator"
 - OS package repository cache/proxy server.
 - Downloadable scenario VMs (OVA).
