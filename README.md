@@ -26,15 +26,18 @@
     - [API](#api)
     - [Scenario Command History Logging](#scenario-command-history-logging)
     - [Other Infrastructure Services](#other-infrastructure--services)
-- [Other Development Practices](#other-development-practices)
-    - [Feature Flags](#feature-flags)
-    - [Linting](#linting)
-    - [Functions and Comments](#functions-and-comments)
+- [CI/CD](#cicd)
+    - [Linting And Formatting](#linting-and-formatting)
     - [Automated Testing](#automated-testing)
+    - [Automated Deployments](#automated-deployments)
+- [Development Practices](#development-practices)
+    - [Pull Requests](#pull-requests)
+    - [Feature Flags](#feature-flags)
+    - [Functions and Comments](#functions-and-comments)
 - [Site Priorities](#site-priorities)
     - [User Experience](#user-experience)
     - [Security](#security)
-- [Code](#code)
+- [Code License](#code-license)
 - [Issues](#issues)
 - [Roadmap](#roadmap)
 - [Collaboration](#collaboration)
@@ -219,7 +222,216 @@ Instance command history:
 
 Without a lot of detail, there's quite a bit of auxiliary services needed to run a public service in a decent "production-ready" state. This includes notification services (AWS SES for email for example), logging service, external uptime monitoring service, scheduled backups, error logging (like [Sentry](https://sentry.io/)), infrastructure as code (Hashicorp [Terraform](https://www.terraform.io/) and [Packer](https://www.packer.io/)).
 
-## Other Development Practices
+## CI/CD
+
+We run in GitHub Actions: linting, testing and deploying to a staging server.
+
+Separately, we constantly run automated end-to-end tests using the SadServers' API.
+
+### Linting and Formatting
+
+We use `Flake8` as a linter and fix (almost) all the flagged issues so there are no warnings. The default Python PEP 8 line length of 79 characters is ridiculous even when working on a small screen, so we are using it with `--max-line-lenght=100`, which is still pretty short (goes up to half the page in GitHub for example). I've also used `Pylint` personally in other projects and I don't remember any significant difference between the two.  
+
+We also use [Black](https://pypi.org/project/black/) as code formatter.
+
+We run both Flake8 and Black automatically in our GitHub pipeline with this Action:
+
+```yaml
+name: Lint with flake8 & black
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8==6.0.0
+          pip install black==24.1.1
+
+      - name: Run flake8
+        run: |
+          flake8 --config=.flake8 --verbose .
+
+      - name: Run black
+        run: |
+          black --check .
+
+```
+
+We also run [djlint](https://www.djlint.com/) as a linter for our Django HTML templates, it adds a bit of protection against code errors in the templates. The GitHub Action is:
+
+```yaml
+name: Lint Django Templates
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  djlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+      - name: Install djLint
+        run: pip install djlint
+      - name: Run djLint
+        run: |
+          djlint sadservers/templates/ --lint --warn --profile=django || true
+
+```
+
+### Automated Testing
+
+I confess I don't do TDD :-|
+
+The most valuable tests for me, in this project, are end-to-end tests. I use two types of automated tests:  
+
+- **Code sanity check**: it's `pytest` running in GitHub Actions whenever I push code, which calls [playwright](https://playwright.dev/) pretending to be a browser and it does some basic site navigation. This is a simple smoke test making sure there are no big issues in the Django project, and it has already saved me from things like a typo in a config file breaking everything.  
+- **End-to-end full path check**: Every x minutes I run a "happy path" test from outside the production environment using the SadServers API, reproducing all the server-side parts of what a user does when they create a new scenario VM. This test runs the main code "normal" path and uses all real dependencies (database, AWS etc) so it will catch any big internal or dependency issues. I think this is the best "bang for the buck" test one can do in a SaaS.
+
+This is the GitHub Action for testing (the E2E test runs as custom code from a separate repo and server)"
+
+```yaml
+name: Run Tests
+
+on: [push]
+
+jobs:
+  Test:
+
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.12"
+        cache: "pip"
+
+    - name: Create log file
+      run: sudo touch /var/log/django.log && sudo chmod 666 /var/log/django.log
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Install playwright dependencies
+      run: |
+        python -m playwright install-deps
+
+    - name: Install Playwright browsers
+      run: python -m playwright install
+  
+    - name: Start Django server
+      run: |
+        export DJANGO_SETTINGS_MODULE=project.settings
+        python manage.py migrate
+        python manage.py runserver 0.0.0.0:8000 &
+        sleep 5
+      env:
+        SECRET_KEY: "fake-key-for-tests"
+        ENVIRONMENT: "TEST"
+
+    - name: Run tests
+      run: make test
+      env:
+        SECRET_KEY: "fake-key-for-tests"
+        ENVIRONMENT: "TEST"
+
+    - name: Upload logs
+      uses: actions/upload-artifact@v4
+      with:
+        name: logs
+        path: /var/log/django.log
+
+```
+
+### Automated Deployments
+
+After linting, formatting and testing, the code change is pushed into a staging environment. This staging server is not available to the public internet.
+
+This was a challenge because Github Actions don't have a stable set of source IP addresses that we can allow-list, so if we wanted to use an SSH connection from the GitHub Action servers to our staging server, we would either have to open the SSH port in our AWS security group for everyone, or we'd have to create an AWS Lambda function to run periodically and grab all the GitHub IP addresses and update the security group rules with them.  
+
+We solved this issue by using Tailscale and its VPN, bypassing the need for direct SSH access. It took quite a bit of time to figure out the Tailscale configuration and permissions on their dashboard, as their documentation wasn't very clear (for example nowhere is explained what `GH_PAT` permissions are required exactly, so a bit of trial and error).
+
+Here's our GitHub Action:
+
+```yaml
+name: Deploy to Dev
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Connect Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:dev-ci
+
+      - name: Deploy to Server
+        run: |
+          ssh -o "StrictHostKeyChecking no" admin@dev 'bash -s' < deploy.sh ${{ github.ref_name }}
+        env:
+          GH_PAT: ${{ secrets.ACTIONS_PAT }}
+
+      - name: Run Django Check
+        run: |
+          ssh -o "StrictHostKeyChecking no" admin@dev 'cd /sadservers && python3 manage.py check'
+
+```
+
+## Development Practices
+
+### Pull Requests
+
+We use trunk-based development as our Git strategy. There are some zealots that say any other type of development is wrong but as always "it depends". Some in the cult even go on to say PRs are bad, as in "dOn'T yOu tRUsT yOur TEam MaTeS?". Not a matter of trust only buddy.
+
+It's really nice to have all related code changes in one place as a unit that can be discussed, reviewed and deployed to an environment independently, rather than a string of interspersed changes that are hard to reason about as a whole. Now that we have AI tools like Mentat or Copilot that can do _some sort of_ quick code review of the PRs at no cost it becomes a no-brainer. ("BUt thEn YoU aRE nOT doInG ConTinuoUs iNteGRation").
+
+PRs are a good habit even when you are a solo developer.
 
 ### Feature Flags
 
@@ -231,11 +443,6 @@ Some say feature flags allow for the separation of deployments (code in prod) an
 
 I've used feature flags (without canary) for big changes like turning on Stripe payments, and they all worked great. In Django to feature-flag the templates and urls is not easy if you try to do directly in their code or in the views but it's easy to do using Django's middleware.
 
-### Linting
-
-I use `Flake8` as linter and fix (almost) all the flagged issues so there's no warnings. The default Python PEP 8 line length of 79 characters is ridiculous even when working on a small screen, so I'm using it with `--max-line-lenght=100`, which is still pretty short (goes up to half the page in Github for example). I've also used `Pylint` in other projects and I don't remember any significant difference between the two.  
-
-Ideally you want to run the linting automatically in your CI/CD chain as soon as you commit your code.
 
 ### Functions and Comments
 
@@ -247,14 +454,6 @@ The "don't write comments; code should speak for itself" crowd, well, I don't kn
 
 I wouldn't mind writing type hints for Python functions but I'm not sure it would have caught any issues.
 
-### Automated Testing
-
-I confess I don't do TDD :-|
-
-The most valuable tests for me, in this project, are end-to-end tests. I use two types of automated tests:  
-
-- Code sanity check: it's `pytest` running in Github Actions whenever I push code, which calls [playwright](https://playwright.dev/) pretending to be a browser and it does some basic site navigation. This is a simple smoke test making sure there are no big issues in the Django project, and it has already saved me from things like a typo in a config file breaking everything.  
-- End-to-end full path check. Every x minutes I run a "happy path" test from outside the production environment using the SadServers API, reproducing all the server-side part of what a user does when they create a new scenario VM. This test runs the main code "normal" path and uses all real dependencies (database, AWS etc) so it will catch any big internal or dependencies issues. I think this is the best "bang for the buck" test one can do in a SaaS.
 
 ## Site Priorities
 
@@ -284,7 +483,7 @@ An incomplete list of things to do in general or that I've done in this case:
 - From the outside Internet there's only network access to an HTTPS port on both web server and proxy server, also there are automatic rate-limiting measures at these public entry points.
 
 
-## Code
+## Code License
 
 This project may become Open Source at some point but for now the code is not publicly available. One reason is that showing the solution to the scenarios defeats the purpose and another reason is to expose details of how things are set up for security reasons. I'll be happy to chat about technical aspects of the project if someone is curious.
 
