@@ -43,6 +43,7 @@
 - [Collaboration](#collaboration)
 - [Scenarios](#scenarios)
 - [Contact](#contact)
+- [Stargazers over time](#stargazers-over-time)
 
 
 ## What
@@ -533,3 +534,7 @@ Currently there's a pay-for-scenario bounty request; see the details at [Make Mo
 ## Contact
 
 Any feedback is appreciated, please email info@sadservers.com
+
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/SadServers/sadservers.svg?variant=adaptive)](https://starchart.cc/SadServers/sadservers)
