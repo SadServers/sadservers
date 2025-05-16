@@ -315,7 +315,7 @@ The most valuable tests for me, in this project, are end-to-end tests. I use two
 - **Code sanity check**: it's `pytest` running in GitHub Actions whenever I push code, which calls [playwright](https://playwright.dev/) pretending to be a browser and it does some basic site navigation. This is a simple smoke test making sure there are no big issues in the Django project, and it has already saved me from things like a typo in a config file breaking everything.  
 - **End-to-end full path check**: Every x minutes I run a "happy path" test from outside the production environment using the SadServers API, reproducing all the server-side parts of what a user does when they create a new scenario VM. This test runs the main code "normal" path and uses all real dependencies (database, AWS etc) so it will catch any big internal or dependency issues. I think this is the best "bang for the buck" test one can do in a SaaS.
 
-This is the GitHub Action for testing (the E2E test runs as custom code from a separate repo and server)"
+This is the GitHub Action for testing (the E2E test runs as custom code from a separate repo and server).
 
 ```yaml
 name: Run Tests
