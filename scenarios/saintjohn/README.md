@@ -3,7 +3,7 @@
 ## Description
 
 A developer created a testing program that is continuously writing to a log file <i>/var/log/bad.log</i> and filling up disk. You can check for example with <kbd>tail -f /var/log/bad.log</kbd>.<br>
-This program is no longer needed. Find it and terminate it.
+This program is no longer needed. Find it and terminate it. Do not delete the log file.
 
 ## Test
 
