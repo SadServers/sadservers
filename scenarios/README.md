@@ -1,8 +1,8 @@
 # SadServers Scenarios
 
-The scenarios have a corresponding directory here and a README.md file which includes the public information: Title, Description, Test (including check.sh script) and Clues.  
+The scenarios have a corresponding directory here and a README.md file which includes the public information: Title, Description, Test (including check.sh script).  
 
-This information will help with suggestions for better wording and better test scripts.
+This information will help with suggestions for better wording and better test scripts. (PR for example).
 
 ## Recreating Scenarios
 
