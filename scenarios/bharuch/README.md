@@ -9,7 +9,7 @@ Using the tooling and resources provided in the server, make the container run c
 
 ## Test
 
-`curl http://localhost:3000` should return "salutations!"  
+`curl http://localhost:3000` should return "Hello from sadservers!"  
 
 The "Check My Solution" button runs the script _/home/admin/agent/check.sh_, which you can see and execute.
 
