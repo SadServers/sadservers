@@ -130,6 +130,8 @@ On the VM instances, [Gotty](https://github.com/yudai/gotty) provides a terminal
 
 ### Replay System
 
+**NOTE**: This feature was discontinued in December 2025.
+
 For the [Linux World Cup](https://github.com/fduran/linuxworldcup) I wanted to have a way to record the user command line sessions and be able to show them publicly. I mean, what good is a World Cup or any competition if people cannot see what the participants are doing?  
 
 I looked at several options and ended up implementing [asciinema](https://asciinema.org/) which does the heavy lifting. You can see the results at [https://replay.sadservers.com](https://replay.sadservers.com).  
@@ -502,19 +504,19 @@ See [Issues](https://github.com/fduran/sadservers/issues)
 - ~~Add tags to scenarios~~ DONE
 - ~~Blog or article system.~~ [DONE](https://docs.sadservers.com/) 
 - ~~API~~ [DONE](https://docs.sadservers.com/docs/api/)
-- ~~Record Bash command history~~ [DONE]
-- ~~Login using Gmail account.~~ [DONE]
-- ~~Invite system.~~ [DONE]
-- ~~Guided learning system.~~ [DONE], kind of, with Markdown, see [Scenario Guides](https://docs.sadservers.com/docs/scenario-guides/)
-- ~~Achievements page with downloadable PDF certificate.~~ [DONE]
-- Enterprise features so companies can create their own interviews, invite candidates and track their results.
-- Multi-VM scenarios, "SRE Simulator"
+- ~~Record Bash command history~~ DONE
+- ~~Login using Gmail account.~~ DONE
+- ~~Invite system.~~ DONE
+- ~~Guided learning system.~~ DONE, kind of, with Markdown, see [Scenario Guides](https://docs.sadservers.com/docs/scenario-guides/)
+- ~~Achievements page with downloadable PDF certificate.~~ DONE
+- ~~Enterprise features so companies can create their own interviews, invite candidates and track their results.~~ DONE
+- Multi-VM scenarios, "SRE Simulator" - WIP
 - OS package repository cache/proxy server.
 - Downloadable scenario VMs (OVA).
 - Translation of texts to multiple languages.
 - Look into WebAssembly (WASM) so users can run (some) scenarios in the browser.
 - Look into alternative hosting methods:
-    - Kubernetes for Dockerized scenarios.
+    - ~~Kubernetes for Dockerized scenarios.~~ DONE (Some scenarios run on K8S)
     - <a href="https://firecracker-microvm.github.io/">Firecracker</a>.
 
 
