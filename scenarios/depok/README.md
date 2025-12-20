@@ -10,7 +10,7 @@ For this purpose, you decided to compile the brotli modules yourself and add the
 
 The location of the Brotli source code is at `/home/admin/ngx_brotli`, and nginx source code, which is needed to compile the modules, is located at `/home/admin/nginx-1.18.0`. You've seen from the official ngx_brotli repository that first you need to compile the brotli dependencies and then configure and make modules for Nginx, once you've done that, you need to add the modules to the Nginx configuration.
 
-After installing the modules, you need to make sure the responses from the server are being server with compression.
+After installing the modules, you need to make sure the responses from the server are being served with compression.
 
 Create a port-forward to port 80 from the server and check the header `Content-Encoding`, responses must return `br` for Brotli compression.
 
