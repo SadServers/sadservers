@@ -2,15 +2,14 @@
 
 ## Description
 
-There's a Kubernetes cluster (created with "k3d") with two worker nodes and two pods on the node _k3d-cluster-agent-0_: a Deployment _demo-deployment-..._ and a StatefulSet _demo-statefulset-0_. Their manifests are identical except for the different kind of K8s resource.  
-
-Make the node hosting the pods unavailable (it "goes down" or "crashes" without being deleted from k8s), for example with: `docker stop k3d-mycluster-agent-0`.  
-
-After waiting for about a minute (_tolerationSeconds_ in the manifest is 30s, we shorten the K8S 5 minutes default so you don't have to wait so much, plus a grace period), both pods are marked as Terminating. While the Deployment pod is evicted and deployed onto the remaining available node _k3d-cluster-agent-1_, the StatefulSet _demo-statefulset-0_ is not (Why?).  
-
-Make the StatefulSet pod _demo-statefulset-0_ run on the available node.  
-
-Note: you can use `k` as a shortcut for `kubectl`.
+There's a Kubernetes cluster (created with "k3d") with two worker nodes and two pods on the node <i>k3d-cluster-agent-0</i>: a Deployment <i>demo-deployment-...</i> and a StatefulSet <i>demo-statefulset-0</i>. Their manifests are identical except for the different kind of K8s resource.
+<br><br>
+Make the node hosting the pods unavailable (it "goes down" or "crashes" without being deleted from k8s), for example with: <kbd>docker stop k3d-mycluster-agent-0</kbd>.<br><br>
+After waiting for about a minute (<i>tolerationSeconds</i> in the manifest is 30s, we shorten the K8S 5 minutes default so you don't have to wait so much, plus a grace period), both pods are marked as Terminating. While the Deployment pod is evicted and deployed onto the remaining available node <i>k3d-cluster-agent-1</i>, the StatefulSet <i>demo-statefulset-0</i> is not (Why?).
+<br><br>
+Make the StatefulSet pod <i>demo-statefulset-0</i> run on the available node.
+<br><br>
+Note: you can use <kbd>k</kbd> as a shortcut for <kbd>kubectl</kbd>.
 
 ## Test
 

@@ -60,11 +60,3 @@ else
   echo -n "NO"
 fi
 ```
-
-## Clues
-
-<b>1. </b>Starting the containers: <kbd> cd rabbitmq-cluster-docker-master ; docker compose up -d </kbd> shows an issue on the RMQ container you can inspect with <kbd>docker logs</kbd>, showing an issue with a file /var/log/rabbitmq/*.log that does not exist<br><br>
-<b>2. </b>Fix the entrypoint in line 26 of cluster-entrypoint.sh , the purpose of this tail -f command is to run any process so the container doesn't exist, you can use in infinite sleep here of for example <kbd>tail -f /var/log/bootstrap.log</kbd><br><br>
-<b>3. </b>Once RMQ cluster works properly, trying to send a message to it <kbd>python3 ~/producer.py hello-lwc</kbd> results in an authentication issue. Inspect the code for consumer.py, producer.py and docker-compose.yml<br><br>
-<b>4. </b>The consumer.py has hard-coded values for username, password and queue name while the producer.py takes them from env vars (that you can change) and for the RMQ containers they take the user and password from env vars (otherwise they use default values). Next Clue gives the solution<br><br>
-<b>Solution </b><kbd>export RABBITMQ_DEFAULT_USER=username; export RABBITMQ_DEFAULT_PASS=password</kbd> and restart docker compose and send the message with: <kbd>RMQ_USER=username RMQ_PASSWORD=password RMQ_QUEUE=hello python3 ~/producer.py hello-lwc</kbd>. An alternative option is to use rabbitmctl to remove all authentication from RMQ.

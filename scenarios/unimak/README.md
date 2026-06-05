@@ -1,4 +1,4 @@
-# "Unimak Island": Fun with Mr Jason
+# Scenario 20: "Unimak Island": Fun with Mr Jason
 
 ## Description
 
@@ -7,6 +7,7 @@ Using the file <i>station_information.json</i> , find the station_id where "has_
 Save the station_id of the solution in the /home/admin/mysolution file, for example: <kbd>echo "ec040a94-4de7-4fb3-aea0-ec5892034a69" > ~/mysolution</kbd>
 <br><br>
 You can use the installed utilities <a href="https://jqlang.github.io/jq/" target="_new">jq</a>, <a href="https://github.com/tomnomnom/gron" target="_new">gron</a>, <a href="https://github.com/simeji/jid" target="_new">jid</a> as well as <a href="https://docs.python.org/3/library/json.html" target="_new">Python3</a> and <a href="https://gobyexample.com/json" target="_new">Golang</a>.
+<br><br>
 
 ## Test
 
@@ -26,9 +27,3 @@ else
   echo -n "NO"
 fi
 ```
-
-## Clues
-
-<b>1. </b>Use <kbd>jq</kbb> for example to inspect: <kbd>jq . station_information.json</kbd> then filter. (Next Clue will give the solution)<br><br>
-<b>2. Solution.</b>For example: <kbd>jq '.data.stations[] | select(.has_kiosk==false and
- .capacity>30) | .station_id' station_information.json</kbd>

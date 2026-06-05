@@ -2,8 +2,8 @@
 
 ## Description
 
-There's an Nginx web server running on this machine, configured to serve a simple "Hello, World!" page over HTTPS. However, the SSL certificate is expired.  
-
+There's an Nginx web server running on this machine, configured to serve a simple "Hello, World!" page over HTTPS. However, the SSL certificate is expired.
+<br><br>
 Create a new SSL certificate for the Nginx web server with the same Issuer and Subject (same domain and company information).
 
 ## Test

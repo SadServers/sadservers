@@ -2,7 +2,10 @@
 
 ## Description
 
-Can't <kbd>ping google.com</kbd>. It returns <kbd>ping: google.com: Name or service not known</kbd>. Expected is being able to resolve the hostname. (Note: currently the VMs can't ping outside so there's no automated check for the solution).
+Can't <kbd>ping google.com</kbd>. It returns <kbd>ping: google.com: Name or service not known</kbd>. Expected is being able to resolve the hostname.
+<br><br>
+<b>Note:</b> Currently the VMs can't ping outside so there's no automated check for the solution.
+<br>Paid accounts can ping outside and check the solution with <kbd>./agent/check,sh</kbd>
 
 ## Test
 
@@ -23,8 +26,3 @@ else
   echo -n "NO"
 fi
 ```
-
-## Clues
-
-<b>1. </b> No clues ¯\_(ツ)_/¯<br><br>(Open window once more to see the complete solution).<br><br>
-<b>Solution: </b> a) Edit <i>/etc/nsswitch.conf</i> and add <i>dns</i> to the <i>hosts:</i> line after <i>files</i>.<br>

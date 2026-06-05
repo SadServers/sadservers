@@ -2,9 +2,8 @@
 
 ## Description
 
-A developer created a script _/home/admin/readdb.py_ that tests access to a database.
+A developer created a script <i>/home/admin/readdb.py</i> that tests access to a database.
 Without modifying the readdb.py file, change the database so that running the script returns the string "John Karmack".
-
 
 ## Test
 

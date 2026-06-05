@@ -64,10 +64,3 @@ done
 
 echo -n "NO"
 ```
-
-## Clues
-
-<b>1. </b>Run <kbd>curl localhost:5000</kbd> a few times to see we are only getting responses from one of the nginx servers. Checking the docker logs with: <kbd>docker compose logs</kbd> (or the log for each container with: <kbd>docker logs haproxy</kbd>) we see a message <i>could not resolve address 'nginx_1'</i> and no messages (UP or DOWN) about nginx_1<br><br>
-<b>2. </b>The reason haproxy cannot resolve nginx_1 is because in the docker-compose.yml definition, nginx_1 uses the <i>backend_network</i> while haproxy and nginx_0 use <i>frontend_network</i>. To fix this we can have all 3 containers on the same network (deleting all network definitions and references) or adding <i>backend_network</i> as an haproxy <i>networks:</i> definition.<br>Restart Docker Compose with: <kbd>docker compose up -d --force-recreate</kbd> (a "restart" is not enough).<br><br> 
-<b>3. </b>Now from <kbd>docker logs haproxy</kbd> the nginx_1 resolution is fixed but haproxy sees it down. Inspect the custom nginx configurations. (Click again "Next Clue/Solution" to reveal the final step).<br><br>
-<b>Solution. </b>From <i>custom-nginx_1.conf</i>, nginx_1 is serving from its port :81 (even if <kbd>docker ps -a</kbd> shows it at :80), so you can change <i>custom-nginx_1.conf</i> so that it also uses :80 like nginx_0 or in haproxy.cfg change the last line to <i>nginx_1:81</i>. Restart Docker Compose again and test running <kbd>curl localhost:5000</kbd> a couple times.

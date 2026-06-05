@@ -1,11 +1,12 @@
 # "Abaokoro": Restore MySQL Databases Spooked by a Ghost
 
 ## Description
-There are three databases that need to be restored. You need to create three databases called "first", "second" and "third" and restore the databases using the file "/home/admin/dbs_to_restore.tar.gz".  
 
-If you encounter an issue while restoring the database, fix it.  
-
-Credit: [Sebastian Segovia](https://www.linkedin.com/in/sebastian-segovia-a7518a228/)
+There are three databases that need to be restored. You need to create three databases called "first", "second" and "third" and restore the databases using the file "/home/admin/dbs_to_restore.tar.gz".
+<br>
+If you encounter an issue while restoring the database, fix it.
+<br><br>
+Credit: <a href="https://www.linkedin.com/in/sebastian-segovia-a7518a228/" target="_blank">Sebastian Segovia</a>
 
 ## Test
 

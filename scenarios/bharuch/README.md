@@ -2,10 +2,9 @@
 
 ## Description
 
-There's a Docker container that runs a web server on port 3000, but it's not working.  
-
+There's a Docker container that runs a web server on port 3000, but it's not working.
+<br><br>
 Using the tooling and resources provided in the server, make the container run correctly.
-
 
 ## Test
 

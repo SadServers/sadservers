@@ -27,9 +27,3 @@ else
   echo -n "NO"
 fi
 ```
-
-## Clues
-
-<b>1. </b>The user agent of the client you are using against the web server may play a role here.<br><br>
-<b>2. </b>The user agents "curl" and "wget" are blocked in the web app code.<br><br>
-<b>Solution:</b>Use telnet or netcat: <kbd>nc localhost 5000</kbd> then <kbd>GET /</kbd> and Enter twice or using curl you can change the user agent: <kbd>curl --user-agent "whatever" localhost:5000</kbd>

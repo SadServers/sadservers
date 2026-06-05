@@ -22,11 +22,3 @@ else
   echo -n "NO"
 fi
 ```
-
-## Clues
-
-<b>1.</b> Run the test. If "curl" doesn't return, perhaps something is blocking the network connection.<br><br>
-<b>2.</b> Check the local firewall (iptables) settings with <kbd>iptables -L</kbd><br><br>
-<b>3. Partial Solution:</b> Delete the iptables rule blocking port :80 , for example: <kbd>iptables -F</kbd> and test again.<br><br>
-<b>4.</b> Check permissions and ownership of the index.html file with: <kbd>ls -l /var/www/html/index.html</kbd><br><br>
-<b>5. Final solution:</b> change the ownership of the index file to the apache user: <kbd>chown www-data: /var/www/html/index.html</kbd> or allow other users to read the file owned by root (worse solution): <kbd>chmod 644 /var/www/html/index.html</kbd><br><br>

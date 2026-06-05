@@ -30,16 +30,3 @@ else
   echo -n "NO"
 fi
 ```
-
-## Clues
-
-<b>1. </b>We can connect to the database with "root:password" as username:password authentication:  `mysql -h 127.0.0.1 -u root -ppassword`<br>
-We can get the user/password values from the database environment variables that we can see with <kbd>docker inspect mariadb</kbd><bt><br>
-Try and see how you can connect in a similar way from the worpress container.<br><br>
-
-<b>2. </b>Compare the database env vars that exist in the WP container from the ones that are needed, for ex <kbd>docker exec wordpress env |grep WORDPRESS_DB_</kbd> versus <kbd>grep WORDPRESS_DB_ ./html/wp-config.php</kbd> or <kbd>docker exec wordpress grep WORDPRESS_DB_ /var/www/html/wp-config.php</kbd><br><br>
-
-<b>3. </b>From the previous hint, the username and password are correctly set, so WORDPRESS_DB_HOST or WORDPRESS_DB_NAME can be the culprits. from the 1st tip we can see if the WORDPRESS_DB_NAME is the default one in code "wordpress".<br><br>
-
-<b>4. </b>The default database host for WP WORDPRESS_DB_HOST is "mysql", but this host is not defined, does not reach the mariadb container.<br><br>
-<b>5. Solution: </b>There are several solutions. One is to define WORDPRESS_DB_HOST as Docker's IP 172.17.0.1 or the host's IP since the database container is exposing its port.

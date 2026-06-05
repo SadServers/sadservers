@@ -2,13 +2,10 @@
 
 ## Description
 
-A spy has left a password in a file in _/proc/sys_ . The contents of the file start with _"secret:"_ (without the quotes).  
-
-
-Find the file and save the word after "secret:" to the file _/home/admin/secret.txt_ with a newline at the end (e.g. if the file contents were "secret:password" do: `echo "password" > /home/admin/secret.txt`).  
-
+A spy has left a password in a file in <i>/proc/sys</i> . The contents of the file start with <i>"secret:"</i> (without the quotes).
+<br><br>Find the file and save the word after "secret:" to the file <i>/home/admin/secret.txt</i> with a newline at the end (e.g. if the file contents were "secret:password" do: <kbd>echo "password" > /home/admin/secret.txt</kbd>).
+<br><br>
 (Note there's no root/sudo access in this scenario).
-
 
 ## Test
 

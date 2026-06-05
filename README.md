@@ -1,6 +1,6 @@
 # SadServers
 
-[SadServers](https://sadservers.com/) is a SaaS where users can test their Linux and DevOps troubleshooting skills on real Linux servers in a "Capture the Flag" fashion.
+[SadServers](https://sadservers.com/) is a SaaS for practicing Linux and DevOps troubleshooting skills on real Linux servers in a Capture-the-Flag (CTF) format. It also helps organizations assess candidates for Linux/DevOps/SRE jobs.
 
 [![mail](https://img.shields.io/badge/info%40sadservers.com-blue)](mailto:info@sadservers.com)&nbsp;&nbsp;&nbsp;
 [![bluesky](https://img.shields.io/badge/BlueSky-sadservers.com-blue?logo=bluesky)](https://bsky.app/profile/sadservers.com)&nbsp;&nbsp;&nbsp;
@@ -60,7 +60,7 @@ Particularly SadServers wants to test these professionals (or people aspiring to
 
 ## Why
 
-To scratch a personal itch and because there's nothing like this that I'm aware of. There are/were some sandbox solutions like Katacoda (shut down in May 2022) but nothing that gives you a specific problem with a condition of victory on a real server.  
+To scratch a personal itch and because there's nothing like this that I was aware of at the time. There were some sandbox solutions like Katacoda (shut down in May 2022) but nothing that gives you a specific problem with a condition of victory on a real server.  
 
 SadServers is also being used by tech companies to automate or facilitate Linux troubleshooting interviews, as well as for internal training.
 
@@ -176,16 +176,14 @@ See the full [API Documentation](https://docs.sadservers.com/docs/api/).
 
 ### Scenario Command History Logging
 
-For certain scenario instances, there's the capability of logging the user shell command history and displaying this command history in the user's dashboard.
-
-This is currently enabled for Pro accounts only and logs are stored for 30 days (any of that can change). The feature is still in "beta" mode with no SLOs.
+Scenario servers created by Pro+ or Business accounts (including candidates) have the capability of logging the user shell command history and displaying this command history in either the user's dashboard or the organization's dashboard. Command history logs are stored for 30 days.
 
 The main ideas for the implementation can be seen in the diagram below. The workflow is:  
 
-  - Upon shell login, `/etc/bash.bashrc` file is executed, where we use the `logger` command to log the last command in the shell history to the system syslog facility.
+  - Upon shell login, `/etc/bash.bashrc` or `/etc/profile` file is executed, where we use the `logger` command to log the last command in the shell history to the system syslog facility.
   - syslog writes to a `/var/log/bash.log` file
   - [Grafana Promtail](https://grafana.com/docs/loki/latest/send-data/promtail/) watches that log file and ships new lines to a [Grafana Loki](https://grafana.com/oss/loki/) server with a label for the instance ID.
-  - The user dashboard at the SadServers.com website queries the Loki server for logs in instances belonging to the user.  
+  - The user or organization dashboard at the SadServers.com website queries the Loki server for logs in instances belonging to the user.  
 
 ![vm_logging](vm_logging.jpg)
 
@@ -494,35 +492,15 @@ This project may become Open Source at some point but for now the code is not pu
 
 See [Issues](https://github.com/fduran/sadservers/issues)
 
-## Roadmap
+## Other projects we are working on
 
-- ~~Save & replay user command history.~~ DONE (with some limitations like replay file size, see [Replay Server](https://replay.sadservers.com/) )
-- ~~Instances with public IPs where the user's public SSH key is added so they can use any SSH client.~~ DONE for selected users. 
-- ~~Code to run competitions~~ DONE for the <A href="https://linuxworldcup.com/">Linux World Cup</a>
-- ~~Guided scenarios with stop-and-resume VMs.~~ DONE
-- ~~User comment system.~~ DONE [piggy-backing on Github](https://github.com/fduran/sadservers/discussions)
-- ~~Add tags to scenarios~~ DONE
-- ~~Blog or article system.~~ [DONE](https://docs.sadservers.com/) 
-- ~~API~~ [DONE](https://docs.sadservers.com/docs/api/)
-- ~~Record Bash command history~~ DONE
-- ~~Login using Gmail account.~~ DONE
-- ~~Invite system.~~ DONE
-- ~~Guided learning system.~~ DONE, kind of, with Markdown, see [Scenario Guides](https://docs.sadservers.com/docs/scenario-guides/)
-- ~~Achievements page with downloadable PDF certificate.~~ DONE
-- ~~Enterprise features so companies can create their own interviews, invite candidates and track their results.~~ DONE
-- Multi-VM scenarios, "SRE Simulator" - WIP
-- OS package repository cache/proxy server.
-- Downloadable scenario VMs (OVA).
-- Translation of texts to multiple languages.
-- Look into WebAssembly (WASM) so users can run (some) scenarios in the browser.
-- Look into alternative hosting methods:
-    - ~~Kubernetes for Dockerized scenarios.~~ DONE (Some scenarios run on K8S)
-    - <a href="https://firecracker-microvm.github.io/">Firecracker</a>.
+- SRE Battle : a benchmark where we pit AI models against SadServers scenarios.   
+- SadPager.com : You are hired as an SRE and in your first on-call you receive a page at 2 am. A superset of SadServers; an SRE simulator expanding beyond working only on the shell console.
 
 
 ## Collaboration
 
-I'll appreciate help with:
+We'll appreciate help with:
 
 - Feedback on the scenarios and general website user experience.
 - Creation of scenarios.

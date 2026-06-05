@@ -1,11 +1,12 @@
 # "Rosario": Restore a MySQL database.
 
 ## Description
+
 A developer created a database named 'main' but now some data is missing in the database. You need to restore the database using the the dump "/home/admin/backup.sql".<br>
 The issue is that the developer forgot the root password for the MariaDB server.<br>
-If you encounter an issue while restoring the database, fix it.  
-
-Credit: [Sebastian Segovia](https://www.linkedin.com/in/sebastian-segovia-a7518a228/)
+If you encounter an issue while restoring the database, fix it.
+<br><br>
+Credit: <a href="https://www.linkedin.com/in/sebastian-segovia-a7518a228/" target="_blank">Sebastian Segovia</a>
 
 ## Test
 

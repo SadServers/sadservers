@@ -1,13 +1,10 @@
 # "Minneapolis with a Vengeance": Break a CSV file
 
-
 ## Description
 
-Break the Comma Separated Valued (CSV) file _data.csv_ in the _/home/admin/_ directory into exactly 10 smaller files of about the same size named _data-00.csv_, _data-01.csv_, ... , _data-09.csv_ files in the same directory. All the files should have the same header (first line with column names) as _data.csv_. None of the smaller files should be bigger than 32KB.  
-
-
-Note: unlike the original [Minneapolis scenario](https://sadservers.com/scenario/minneapolis), here the resulting files have to be proper CSV files.  
-
+Break the Comma Separated Valued (CSV) file <i>data.csv</i> in the <i>/home/admin/</i> directory into exactly 10 smaller files of about the same size named <i>data-00.csv</i>, <i>data-01.csv</i>, ... , <i>data-09.csv</i> files in the same directory. All the files should have the same header (first line with column names) as <i>data.csv</i>. None of the smaller files should be bigger than 32KB.
+<br><br>Note: unlike the original <a href="https://sadservers.com/scenario/minneapolis" target="_new">Minneapolis scenario</a>, here the resulting files have to be proper CSV files.
+<br><br>
 As a helper tool, you can run the program check_csv.py to check if your data-??.cs files look like proper CSV files.
 
 ## Test

@@ -24,10 +24,3 @@ else
   echo -n "NO"
 fi
 ```
-
-
-## Clues
-
-<b>1. </b>You can use the <i>knock</i> utility, for example to knock on port 3000: <kbd>knock localhost 3000</kbd>. Netcat (nc) and nmap are also available. Note than nmap has some options where you'd need to be root (not possible here)<br><br>
-<b>2. </b>You can also write a BASH script that knocks sequentially on all ports.<br><br>
-<b>3. Solution.</b>Probably the fastest is using nmap against all ports, for example: <kbd>nmap -p- localhost</kbd>.

@@ -29,8 +29,6 @@ All definition for the containers are inside `docker-compose.yml` file. You can 
 
 If you make any change to the docker-compose.yml file, you can restart the containers by running `docker compose up -d --force-recreate`.
 
-
-
 ## Test
 
 Postgres replica container works.

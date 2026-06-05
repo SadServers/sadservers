@@ -2,11 +2,11 @@
 
 ## Description
 
-The directory at _/home/admin/git_ has a Git repository with a Golang program and a test for it.  
-
-To execute the test, from this "git" directory run: `go test`. The last (current HEAD) commit fails the test. Suppose the first commit passed the test.  
-
-Find the (long hash) commit that first broke the test and enter it in the _/home/admin/solution_ file. For example: `echo 9e80a7eb1b09385e93ab4a76cb2c93beec48fd9f > /home/admin/solution`
+The directory at <i>/home/admin/git</i> has a Git repository with a Golang program and a test for it. 
+<br><br>
+To execute the test, from this "git" directory run: <kbd>go test</kbd>. The last (current HEAD) commit fails the test. Suppose the first commit passed the test.
+<br><br>
+Find the (long hash) commit that first broke the test and enter it in the <i>/home/admin/solution</i> file. For example: <kbd>echo 9e80a7eb1b09385e93ab4a76cb2c93beec48fd9f > /home/admin/solution</kbd>
 
 ## Test
 

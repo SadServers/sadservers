@@ -2,11 +2,10 @@
 
 ## Description
 
-A developer created a golang application that is exposing the _/metrics_ endpoint. They have a problem with scraping the metrics from the application. They asked you to help find the problem.
-
-Full source code of the application is available at the _/home/admin/app_ directory.
-
-Credit [Kamil Błaż](https://www.devkblaz.com/)
+A developer created a golang application that is exposing the <i>/metrics</i> endpoint. They have a problem with scraping the metrics from the application. They asked you to help find the problem.
+<br><br>Full source code of the application is available at the <i>/home/admin/app</i> directory.
+<br><br>
+Credit <a href="https://www.devkblaz.com/" target="_blank">Kamil Błaż</a>
 
 ## Test
 
@@ -26,6 +25,3 @@ else
     echo -n "NO"
 fi
 ```
-    
-
-

@@ -31,11 +31,3 @@ else
   echo -n "NO"
 fi
 ```
-
-## Clues
-
-<b>1. </b> You can use the translation utility <a href="https://linuxcommand.org/lc3_man_pages/tr1.html" target="_blank">tr</a> to take out spaces and newlines with repetition (with test file): <kbd>cat test.txt|tr -s ' ' '\n'</kbd><br><br>
-<b>2. </b> Next you can delete the punctuation symbols, piping to the previous result: <kbd>| tr -d '.,:;'</kbd><br><br>
-<b>3. </b> Then we can transform the resulting words all into upper case by adding: <kbd>tr '[:lower:]' '[:upper:]'</kbd> (Next "Clue" reveals the full solution)<br><br>
-<b>4. </b> Finally we can group (sort) the words, count by frequency (uniq) and sort the result (reversed; biggest number first) with <kbd>sort|uniq -c|sort -r</kbd>. To get the first 10 most frequent words we can add for example <kbd>|head -10</kbd>. Complete command: <kbd>cat frankestein.txt|tr -s ' ' '\n'| tr -d '.,:;'|tr '[:lower:]' '[:upper:]'|sort|uniq -c|sort -r |head -10</kbd> So the solution is "AND".
-

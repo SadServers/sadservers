@@ -10,8 +10,6 @@ The "webapp" responds to `curl http://127.0.0.1:8000` and the docker version of 
 
 Find all the "compromised" libraries paths that are used by the hijacked processes. Save their paths in the /home/admin/paths file (one path per line), for example: `echo '/path/to/liblzma.so.5' >> /home/admin/paths`, one per path.
 
-
-
 ## Test
 
 `lsof | grep liblzma.so.5` returns only the liblzma in the path: `/usr/lib/x86_64-linux-gnu/liblzma.so.5.2.5`

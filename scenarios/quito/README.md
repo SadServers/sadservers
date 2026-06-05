@@ -2,10 +2,9 @@
 
 ## Description
 
-You have a running container named _docker-access_. Another container _nginx_ is present but in a stopped state. Your goal is to start the nginx container from inside the docker-access container.  
-
-You must not start the nginx container from the host system or any other container that is not _docker-access_. You can restart this _docker-access_ container.
-
+You have a running container named <i>docker-access</i>. Another container <i>nginx</i> is present but in a stopped state. Your goal is to start the nginx container from inside the docker-access container.
+<br><br>
+You must not start the nginx container from the host system or any other container that is not <i>docker-access</i>. You can restart this <i>docker-access</i> container.
 
 ## Test
 
@@ -36,5 +35,3 @@ else
   echo -n "NO"
 fi
 ```
-
-

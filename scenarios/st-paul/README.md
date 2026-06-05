@@ -2,8 +2,7 @@
 
 ## Description
 
-Join (merge) all the 338 files in _/home/admin/polldayregistrations_enregistjourduscrutin?????.csv_ into one single _/home/admin/all.csv_ file with the contents of all the CSV files in any order. There should be only one line with the names of the columns as a header.
-
+Join (merge) all the 338 files in <i>/home/admin/polldayregistrations_enregistjourduscrutin?????.csv</i> into one single <i>/home/admin/all.csv</i> file with the contents of all the CSV files in any order. There should be only one line with the names of the columns as a header.
 
 ## Test
 

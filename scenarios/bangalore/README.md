@@ -2,14 +2,13 @@
 
 ## Description
 
-There is an Envoy proxy routing traffic to two unhealthy backend services but the Envoy container won't start. Your first task is to fix that.  
-
-When the number of healthy backends falls under a panic threshold (default 50%), Envoy enters a _panic mode_ and it will either send traffic to all upstream hosts or to none at all.    
-
-We are simulating this condition by returning an HTTP 503 status code from the _/health_ endpoint in both backends. In our case Envoy is sending traffic to all upstream services.  
-
+There is an Envoy proxy routing traffic to two unhealthy backend services but the Envoy container won't start. Your first task is to fix that.
+<br><br>
+When the number of healthy backends falls under a panic threshold (default 50%), Envoy enters a <i>panic mode</i> and it will either send traffic to all upstream hosts or to none at all.  
+<br><br>
+We are simulating this condition by returning an HTTP 503 status code from the <i>/health</i> endpoint in both backends. In our case Envoy is sending traffic to all upstream services.
+<br><br>
 Your second task is to change the panic Envoy behaviour so that it does not route any traffic to unhealthy services and instead Envoy returns "no healthy upstream". (Do not change anything in the backend services). There can also be other Envoy configuration issues you need to fix.
-
 
 ## Test
 

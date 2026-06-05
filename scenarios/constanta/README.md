@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a "hacking" or Capture The Flag challenge. You need to copy the message at `/home/user3/secret.txt` into the `/home/admin/solution.txt` file.
+This is a "hacking" or Capture The Flag challenge. You need to copy the message at <kbd>/home/user3/secret.txt</kbd> into the <kbd>/home/admin/solution.txt</kbd> file.
 
 ## Test
 

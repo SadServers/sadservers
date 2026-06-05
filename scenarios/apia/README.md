@@ -1,14 +1,13 @@
 # "Apia": Needle in a Haystack
 
-## Description:
-In a directory _/home/admin/data-, there are multiple files, all of them with same content. One of these files has been modified, a word was added. You need to identify which word it is and put it in the solution file (both newline terminated or not are accepted).
+## Description
 
-## Test:
+In a directory <i>/home/admin/data</i>, there are multiple files, all of them with same content. One of these files has been modified, a word was added. You need to identify which word it is and put it in the solution file (both newline terminated or not are accepted).
 
-`md5sum /home/admin/solution` should return `55aba155290288b58e9b778c8f616560` or `2eeefea9fc4b16ea624bed5c67a49d80`  
+## Test
 
-Check My Solution:
-The "Check My Solution" button runs the script _/home/admin/agent/check.sh_, which you can see and execute.
+The "Check My Solution" button runs the script `/home/admin/agent/check.sh`, which you can see and execute.
+
 
 **check.sh**
 
