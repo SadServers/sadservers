@@ -231,7 +231,7 @@ Separately, we constantly run automated end-to-end tests using the SadServers' A
 
 ### Linting and Formatting
 
-We use `Flake8` as a linter and fix (almost) all the flagged issues so there are no warnings. The default Python PEP 8 line length of 79 characters is ridiculous even when working on a small screen, so we are using it with `--max-line-lenght=100`, which is still pretty short (goes up to half the page in GitHub for example). I've also used `Pylint` personally in other projects and I don't remember any significant difference between the two.  
+We use `Flake8` as a linter and fix (almost) all the flagged issues so there are no warnings. The default Python PEP 8 line length of 79 characters is ridiculous even when working on a small screen, so we are using it with `--max-line-length=100`, which is still pretty short (goes up to half the page in GitHub for example). I've also used `Pylint` personally in other projects and I don't remember any significant difference between the two.  
 
 We also use [Black](https://pypi.org/project/black/) as code formatter.
 
