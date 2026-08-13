@@ -15,7 +15,7 @@ where <i>STATUS</i> is exactly <kbd>open</kbd> or <kbd>closed</kbd> (lowercase).
 <br><br>
 A template file <i>/home/admin/port-audit.txt</i> is available with values per port "open|closed", delete the separator and the incorrect value per port or re-create the file.
 <br><br>
-The following are <b>not available</b> on this system (removed or restricted): <kbd>ss</kbd>, <kbd>netstat</kbd>, <kbd>nmap</kbd>, <kbd>nc</kbd>, <kbd>telnet</kbd>, <kbd>curl</kbd>, <kbd>lsof</kbd>, <kbd>tcpdump</kbd>.
+The following are <b>not available</b> on this system (removed or restricted): <kbd>ss</kbd>, <kbd>netstat</kbd>, <kbd>nmap</kbd>, <kbd>nc</kbd>, <kbd>telnet</kbd>, <kbd>curl</kbd>, <kbd>wget</kbd>, <kbd>lsof</kbd>, <kbd>tcpdump</kbd>, <kbd>openssl</kbd>, <kbd>fuser</kbd>.
 <br><br>
 NOTE: you don't have root (superuser) access.
 

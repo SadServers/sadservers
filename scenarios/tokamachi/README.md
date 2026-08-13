@@ -16,9 +16,9 @@ You'll see that after a minute or so it works for a while (the reader receives s
 
 ## Test
 
-There should be a process running where a message is being sent to the pipe and that while that is running, another message can be sent to the pipe and read back.
+There should be a writer process sending messages to the pipe with a delay between writes (so the reader can keep up), and <i>reader.log</i> should still be receiving messages.<br><br>
+The "Check My Solution" button runs the script <i>/home/admin/agent/check.sh</i>, which you can see and execute.
 
-The "Check My Solution" button runs the script _/home/admin/agent/check.sh_, which you can see and execute.
 
 **check.sh**
 
@@ -26,18 +26,28 @@ The "Check My Solution" button runs the script _/home/admin/agent/check.sh_, whi
 #!/usr/bin/bash
 # DO NOT MODIFY THIS FILE ("Check My Solution" will fail)
 
-if ! ps auxf|grep -q 'pipe" > /home/admin/named[pipe]'; then
+if ! pgrep -f 'start_reader[.]sh' > /dev/null 2>&1; then
   echo -n "NO"
-  exit
+  exit 0
 fi
 
-uui=$(uuidgen| cut -c1-8)
-echo $uui > /home/admin/namedpipe
-sleep 1
-
-if grep -q "$uui" /home/admin/reader.log; then
-  echo -n "OK"
-else
+if [ ! -s /home/admin/reader.log ]; then
   echo -n "NO"
+  exit 0
 fi
+
+last_mod=$(stat -c %Y /home/admin/reader.log 2>/dev/null || echo 0)
+now=$(date +%s)
+if (( now - last_mod > 15 )); then
+  echo -n "NO"
+  exit 0
+fi
+
+if ! ps auxww | grep 'named[p]ipe' | grep -q 'sleep'; then
+  echo -n "NO"
+  exit 0
+fi
+
+echo -n "OK"
+exit 0
 ```
