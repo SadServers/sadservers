@@ -56,7 +56,9 @@ Problems include common software that run on Linux, like databases or web server
 
 SadServers is aimed primarily at users that are professional Software Developers (possibly), System Administrators, DevOps engineers, SREs, and related positions that require server debugging and troubleshooting skills.  
 
-Particularly SadServers wants to test these professionals (or people aspiring to these jobs) in a way that would be useful for the purpose of a troubleshooting part of a job interview.
+SadServers also helps companies assess job candidates through hands-on technical interviews.  
+
+SRE AI companies use SadServers as a benchmark to evaluate or train their models. We also carry out our own evaluation, see for example [SRE Battle](https://srebattle.com/).
 
 ## Why
 
@@ -494,18 +496,13 @@ See [Issues](https://github.com/fduran/sadservers/issues)
 
 ## Other projects we are working on
 
-- SRE Battle : a benchmark where we pit AI models against SadServers scenarios.   
+- SREBattle.com : a benchmark where we pit AI models against SadServers scenarios.   
 - SadPager.com : You are hired as an SRE and in your first on-call you receive a page at 2 am. A superset of SadServers; an SRE simulator expanding beyond working only on the shell console.
 
 
 ## Collaboration
 
-We'll appreciate help with:
-
-- Feedback on the scenarios and general website user experience.
-- Creation of scenarios.
-
-Currently there's a pay-for-scenario bounty request; see the details at [Make Money Creating SadServers Scenarios](https://docs.sadservers.com/docs/make-money-creating-scenarios/).
+We'll appreciate help with feedback on the scenarios and general website user experience.
 
 ## Scenarios
 
